@@ -38,10 +38,10 @@ class HomePage extends StatelessWidget {
                             child: Image.network(
                                 'https://image.tmdb.org/t/p/original/${movies.popularMovies[0].posterPath}'))),
                   ),
-                  movieWidget(context,movies.nowPlayingMovies,'현재상영중'),
-                  movieWidget(context,movies.popularMovies, '인기순'),
-                  movieWidget(context,movies.topRatedMovies,'평점 높은 순'),
-                  movieWidget(context,movies.upcomingMovies, '개봉예정'),
+                  movieWidget(context, movies.nowPlayingMovies, '현재상영중'),
+                  movieWidget(context, movies.popularMovies, '인기순'),
+                  movieWidget(context, movies.topRatedMovies, '평점 높은 순'),
+                  movieWidget(context, movies.upcomingMovies, '개봉예정'),
                 ],
               ),
             ),
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Column movieWidget(BuildContext context,List<Movie> movie, String text) {
+  Column movieWidget(BuildContext context, List<Movie> movie, String text) {
     return Column(
       children: [
         Align(
@@ -61,28 +61,29 @@ class HomePage extends StatelessWidget {
             child: Text(text),
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              (context),
-              MaterialPageRoute(builder: (context) => DetailPage()),
-            );
-            print('touch');
-          },
-          child: SizedBox(
-            height: 180,
-            child: ListView.builder(
-              itemCount: movie.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
+        SizedBox(
+          height: 180,
+          child: ListView.builder(
+            itemCount: movie.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    (context),
+                    MaterialPageRoute(builder: (context) => DetailPage(movie[index].id)),
+                  );
+                  print('push test: ${movie[index].id}');
+                  print('touch');
+                },
+                child: Container(
                   width: 100,
                   margin: EdgeInsets.all(5),
                   child: Image.network(
                       'https://image.tmdb.org/t/p/original/${movie[index].posterPath}'),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ],

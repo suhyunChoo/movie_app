@@ -10,7 +10,7 @@ class MovieRepositoryImpl implements MovieRepository {
   final MovieDataSource _movieDataSource;
 
   @override
-  Future<List<Movie>> fetchNowPlayingMovies() async {
+  Future<List<Movie>?> fetchNowPlayingMovies() async {
     final result = await _movieDataSource.fetchNowPlayingMovies();
     return result!
         .map(
@@ -24,15 +24,13 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<MovieDetail?> fetchMovieDetail(int id) async{
-    // TODO: implement fetchMovieDetail
-    throw UnimplementedError();
-  }
+    final result = await _movieDataSource.fetchMovieDetail(id);
+    if(result == null){
+      return null;
+    }
+    return result;
 
-  // @override
-  // Future<List<Movie>?> fetchNowPlayingMovies() async{
-  //   // TODO: implement fetchNowPlayingMovies
-  //   throw UnimplementedError();
-  // }
+  }
 
   @override
   Future<List<Movie>?> fetchPopularMovies() async{

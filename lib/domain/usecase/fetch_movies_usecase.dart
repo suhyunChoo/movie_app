@@ -1,3 +1,4 @@
+import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';
@@ -20,8 +21,8 @@ class FetchMoviesUsecase {
   Future<List<Movie>?>getUpcoming()async{
     return await _movieRepository.fetchUpcomingMovies();
   }
-  Future<MovieDetail?>getDetail()async{
-    // return await _movieRepository.fetchMovieDetail(int id);
+  Future<MovieDetail?>getDetail(int id)async{
+    return await _movieRepository.fetchMovieDetail(id);
   }
 
 }

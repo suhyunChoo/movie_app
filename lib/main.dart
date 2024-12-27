@@ -4,9 +4,7 @@ import 'package:flutter_movie_app/presentation/pages/detail_page/detail_page.dar
 import 'package:flutter_movie_app/presentation/pages/home_page/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized(); 
   await dotenv.load(fileName: ".env"); 

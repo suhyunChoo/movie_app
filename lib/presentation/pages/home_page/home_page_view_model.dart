@@ -8,10 +8,7 @@ class HomePageViewModel extends Notifier<MovieList> {
   @override
   MovieList build() {
     fetchMovies();
-    // fetchNowPlayingMovies();
-    //fetchPopularMovies();
-    // fetchUpcomingMovies();
-    // fetchTopRatedMovies();
+    MovieList.initial();
     return MovieList();
   }
 
@@ -26,7 +23,7 @@ class HomePageViewModel extends Notifier<MovieList> {
       final upcomingMovies =
           await ref.read(fetchMoviesUsecaseProvider).getUpcoming();
 
-      state = MovieList(
+      state = state.copyWith(
           nowPlayingMovies: nowPlayingMovies!,
           popularMovies: popularMovies!,
           topRatedMovies: topRatedMovies!,
@@ -36,26 +33,16 @@ class HomePageViewModel extends Notifier<MovieList> {
     }
   }
 
-  // Future<void> fetchNowPlayingMovies() async {
-  //   state = await ref.read(fetchMoviesUsecaseProvider).excute();
-  // }
+  Future<void> fetchDetail(int id) async {
+    try {
+      final movieDetail =
+          await ref.read(fetchMoviesUsecaseProvider).getDetail(id);
 
-  // Future<void> fetchPopularMovies() async {
-  //   state = await ref.read(fetchMoviesUsecaseProvider).getPopular();
-  // }
-
-  // Future<void> fetchTopRatedMovies() async {
-  //   state = await ref.read(fetchMoviesUsecaseProvider).getTopRated();
-  // }
-
-  // Future<void> fetchUpcomingMovies() async {
-  //   state = await ref.read(fetchMoviesUsecaseProvider).getUpcoming();
-  // }
-
-  // Future<void> fetchMovieDetail() async {
-  //   //수정해야 함
-  //   // state = await ref.read(fetchMoviesUsecaseProvider).excute();
-  // }
+      state = state.copyWith(getMovieDetail: movieDetail);
+    } catch (e) {
+      print(e);
+    }
+  }
 }
 
 final homePageViewModel =

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
+import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:http/http.dart';
 
 class MovieDataSourceImpl implements MovieDataSource {
@@ -108,8 +109,30 @@ class MovieDataSourceImpl implements MovieDataSource {
   }
 
   @override
-  Future<List<MovieResponseDto>?> fetchMovieDetail() {
-    // TODO: implement fetchMovieDetail
-    throw UnimplementedError();
+  Future<MovieDetail?> fetchMovieDetail(int id) async {
+    try {
+      Client client = Client();
+      Response result = await client.get(
+        Uri.parse('https://api.themoviedb.org/3/movie/$id'),
+        headers: {
+          'Authorization': dotenv.get('API_KEY'),
+          'accept': 'application/json',
+        },
+      );
+
+      if (result.statusCode == 200) {
+        final decodedJson = jsonDecode(result.body) as Map<String, dynamic>;
+        print('movie_data_source_impl: ${decodedJson}');
+
+        // MovieDetail 변환하여 반환
+        return MovieDetail.fromJson(decodedJson);
+        
+      }
+      return null;
+
+    } catch (e) {
+      print('Error fetching movie detail: $e');
+      return null;
+    }
   }
 }
