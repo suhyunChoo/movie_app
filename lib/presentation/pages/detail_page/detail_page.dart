@@ -9,9 +9,9 @@ class DetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 비동기 상태 구독
     final movies = ref.watch(homePageViewModel);
     ref.read(homePageViewModel.notifier).fetchDetail(movieId);
+
 
     return Scaffold(
       appBar: AppBar(),
@@ -27,71 +27,216 @@ class DetailPage extends ConsumerWidget {
                     AspectRatio(
                       aspectRatio: 2 / 3,
                       child: Image.network(
-                        'https://image.tmdb.org/t/p/original/${movies.getMovieDetail!.posterPath}',
+                        'https://image.tmdb.org/t/p/original${movies.getMovieDetail!.posterPath}',
                         errorBuilder: (context, error, stackTrace) =>
                             const Icon(Icons.error),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        movies.getMovieDetail!.title ?? 'No Title',
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Row(
+                        children: [
+                          Text(
+                            movies.getMovieDetail!.title ?? 'No Title',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text('${movies.getMovieDetail!.releaseDate}'),
+                        ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       child: Text(
-                        '태그라인: ${movies.getMovieDetail!.tagline ?? '정보 없음'}',
+                        '${movies.getMovieDetail!.tagline ?? '정보 없음'}',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       child: Text(
                         '러닝타임: ${movies.getMovieDetail!.runtime ?? 0}분',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        '카테고리: ${movies.getMovieDetail!.genres ?? '정보 없음'}',)
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        '영화 설명: ${movies.getMovieDetail!.overview ?? '정보 없음'}',
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20),
+                      child: const Divider(
+                        color: Colors.white38,
+                        thickness: 1.0,
                       ),
                     ),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 1.0,
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        child: Row(
+                          children: [
+                            ...movies.getMovieDetail!.genres.map((genre) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 8.0), // 각 항목 간의 간격 조정
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        genre.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Theme.of(context).highlightColor,
+                                        ),
+                                      ),
+                                    )),
+                              );
+                            }).toList(),
+                          ],
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20),
+                      child: const Divider(
+                        color: Colors.white38,
+                        thickness: 1.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Text('${movies.getMovieDetail!.overview ?? '정보 없음'}',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      child: const Divider(
+                        color: Colors.white38,
+                        thickness: 1.0,
+                      ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       child: Text(
                         '흥행 정보',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                     SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10, // 실제 데이터로 변경 필요
-                        itemBuilder: (context, index) {
-                          return Container(
-                            width: 100,
-                            margin: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              border: Border.all(width: 2),
+                      //popularity평점 평점투표수 인기점수 예산 수익
+                      //popularity ,voteAverage,voteCount,budget,revenue
+                      height: 80,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: ListView(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white
+                                )
+                                
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text('${movies.getMovieDetail!.popularity}',
+                                )),
                             ),
-                            child: Center(child: Text('$index')),
-                          );
-                        },
+                            SizedBox(width: 10,),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white
+                                )
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text('${movies.getMovieDetail!.voteAverage}')),
+                            ),
+                            SizedBox(width: 10,),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white
+                                )
+             
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text('${movies.getMovieDetail!.budget}')),
+                            ),
+                            SizedBox(width: 10,),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white
+                                )
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text('${movies.getMovieDetail!.revenue}')),
+                            ),
+                            SizedBox(width: 10,),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white
+                                )
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text('${movies.getMovieDetail!.popularity}')),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      child: SizedBox(
+                        height: 100,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              movies.getMovieDetail!.productionCompanies.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: EdgeInsets.all(20),
+                              width: 150,
+                              margin: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],),
+                              child: movies.getMovieDetail!
+                                          .productionCompanies[index].logoPath !=
+                                      null
+                                  ? Image.network(
+                                      'https://image.tmdb.org/t/p/original${movies.getMovieDetail!.productionCompanies[index].logoPath}')
+                                  : Text(movies.getMovieDetail!
+                                      .productionCompanies[index].name),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

@@ -80,6 +80,8 @@ MovieDetail MovieDetailFromJson(String str) => MovieDetail.fromJson(json.decode(
 
 String MovieDetailToJson(MovieDetail data) => json.encode(data.toJson());
 
+//평점, 인기투표수, 예산,수익
+
 class MovieDetail {
     bool adult;
     String backdropPath;

@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                           child: AspectRatio(
                               aspectRatio: 2 / 3,
                               child: Image.network(
-                                  'https://image.tmdb.org/t/p/original/${movies.popularMovies[0].posterPath}'))),
+                                  'https://image.tmdb.org/t/p/original${movies.popularMovies[0].posterPath}'))),
                     ),
                   ),
                   movieWidget(context, movies.nowPlayingMovies, '현재상영중'),
@@ -94,7 +94,7 @@ class HomePage extends StatelessWidget {
                   width: 100,
                   margin: EdgeInsets.all(5),
                   child: Image.network(
-                      'https://image.tmdb.org/t/p/original/${movie[index].posterPath}'),
+                      'https://image.tmdb.org/t/p/original${movie[index].posterPath}'),
                 ),
               );
             },
