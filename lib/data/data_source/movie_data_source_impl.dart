@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
@@ -122,7 +121,6 @@ class MovieDataSourceImpl implements MovieDataSource {
 
       if (result.statusCode == 200) {
         final decodedJson = jsonDecode(result.body) as Map<String, dynamic>;
-        print('movie_data_source_impl: ${decodedJson}');
 
         // MovieDetail 변환하여 반환
         return MovieDetail.fromJson(decodedJson);

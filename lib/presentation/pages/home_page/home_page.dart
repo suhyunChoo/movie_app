@@ -9,10 +9,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Consumer(builder: (context, ref, child) {
+        // ref.watch(homePageViewModel);
         final movies = ref.watch(homePageViewModel);
         if (movies == null) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (movies.popularMovies.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -26,17 +31,27 @@ class HomePage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text('가장 인기있는 영화'),
+                    child: Text('가장 인기있는'),
                   ),
                   Align(
                     alignment: Alignment.center,
-                    child: Container(
-                        padding: EdgeInsets.all(20),
-                        width: double.infinity,
-                        child: AspectRatio(
-                            aspectRatio: 2 / 3,
-                            child: Image.network(
-                                'https://image.tmdb.org/t/p/original/${movies.popularMovies[0].posterPath}'))),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          (context),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(movies.popularMovies[0].id)),
+                        );
+                      },
+                      child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: double.infinity,
+                          child: AspectRatio(
+                              aspectRatio: 2 / 3,
+                              child: Image.network(
+                                  'https://image.tmdb.org/t/p/original/${movies.popularMovies[0].posterPath}'))),
+                    ),
                   ),
                   movieWidget(context, movies.nowPlayingMovies, '현재상영중'),
                   movieWidget(context, movies.popularMovies, '인기순'),
@@ -71,10 +86,9 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     (context),
-                    MaterialPageRoute(builder: (context) => DetailPage(movie[index].id)),
+                    MaterialPageRoute(
+                        builder: (context) => DetailPage(movie[index].id)),
                   );
-                  print('push test: ${movie[index].id}');
-                  print('touch');
                 },
                 child: Container(
                   width: 100,
