@@ -1,13 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:http/http.dart';
 
 class MovieDataSourceImpl implements MovieDataSource {
-
-
   @override
   Future<List<MovieResponseDto>?> fetchNowPlayingMovies() async {
     try {
@@ -16,8 +15,7 @@ class MovieDataSourceImpl implements MovieDataSource {
           Uri.parse(
               'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}'),
           headers: {
-            'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTg3ZGMyNzBkNTc1ODE2M2VlY2ZkYTI4ZTQ5YmVjOSIsIm5iZiI6MTczNTE4MzczOC41MjE5OTk4LCJzdWIiOiI2NzZjY2Q3YWQwYjA4Zjk3MTg2MTM3ZDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.1WKk21HZS9Pvgr544pWs0wozGuaKmZRpua_z5mEGtfY',
+            'Authorization': dotenv.get('API_KEY'),
             'accept': 'application/json',
           });
       if (result.statusCode == 200) {
@@ -42,8 +40,7 @@ class MovieDataSourceImpl implements MovieDataSource {
           Uri.parse(
               'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'),
           headers: {
-            'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTg3ZGMyNzBkNTc1ODE2M2VlY2ZkYTI4ZTQ5YmVjOSIsIm5iZiI6MTczNTE4MzczOC41MjE5OTk4LCJzdWIiOiI2NzZjY2Q3YWQwYjA4Zjk3MTg2MTM3ZDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.1WKk21HZS9Pvgr544pWs0wozGuaKmZRpua_z5mEGtfY',
+            'Authorization': dotenv.get('API_KEY'),
             'accept': 'application/json',
           });
       if (result.statusCode == 200) {
@@ -68,8 +65,7 @@ class MovieDataSourceImpl implements MovieDataSource {
           Uri.parse(
               'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200'),
           headers: {
-            'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTg3ZGMyNzBkNTc1ODE2M2VlY2ZkYTI4ZTQ5YmVjOSIsIm5iZiI6MTczNTE4MzczOC41MjE5OTk4LCJzdWIiOiI2NzZjY2Q3YWQwYjA4Zjk3MTg2MTM3ZDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.1WKk21HZS9Pvgr544pWs0wozGuaKmZRpua_z5mEGtfY',
+            'Authorization': dotenv.get('API_KEY'),
             'accept': 'application/json',
           });
       if (result.statusCode == 200) {
@@ -94,8 +90,7 @@ class MovieDataSourceImpl implements MovieDataSource {
           Uri.parse(
               'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}'),
           headers: {
-            'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTg3ZGMyNzBkNTc1ODE2M2VlY2ZkYTI4ZTQ5YmVjOSIsIm5iZiI6MTczNTE4MzczOC41MjE5OTk4LCJzdWIiOiI2NzZjY2Q3YWQwYjA4Zjk3MTg2MTM3ZDIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.1WKk21HZS9Pvgr544pWs0wozGuaKmZRpua_z5mEGtfY',
+            'Authorization': dotenv.get('API_KEY'),
             'accept': 'application/json',
           });
       if (result.statusCode == 200) {
@@ -111,12 +106,10 @@ class MovieDataSourceImpl implements MovieDataSource {
       return null;
     }
   }
-  
+
   @override
   Future<List<MovieResponseDto>?> fetchMovieDetail() {
     // TODO: implement fetchMovieDetail
     throw UnimplementedError();
   }
-
-
 }
