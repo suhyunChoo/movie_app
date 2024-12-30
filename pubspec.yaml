@@ -38,6 +38,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   flutter_riverpod: ^2.6.1
   http: ^1.2.2
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

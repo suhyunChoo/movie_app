@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer(builder: (context, ref, child) {
-        // ref.watch(homePageViewModel);
+        ref.watch(homePageViewModel);
         final movies = ref.watch(homePageViewModel);
         if (movies == null) {
           return const Center(
@@ -40,17 +40,23 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           (context),
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailPage(movies.popularMovies[0].id)),
+                              builder: (context) => DetailPage(
+                                  movies.popularMovies[0].id, 'popular')),
                         );
                       },
-                      child: Container(
-                          padding: EdgeInsets.all(20),
-                          width: double.infinity,
-                          child: AspectRatio(
-                              aspectRatio: 2 / 3,
-                              child: Image.network(
-                                  'https://image.tmdb.org/t/p/original${movies.popularMovies[0].posterPath}'))),
+                      child: Hero(
+                        tag: 'popular-${movies.popularMovies[0].id}',
+                        child: Container(
+                            padding: EdgeInsets.all(20),
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: AspectRatio(
+                                  aspectRatio: 2 / 3,
+                                  child: Image.network(
+                                      'https://image.tmdb.org/t/p/original${movies.popularMovies[0].posterPath}')),
+                            )),
+                      ),
                     ),
                   ),
                   movieWidget(context, movies.nowPlayingMovies, '현재상영중'),
@@ -87,14 +93,23 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     (context),
                     MaterialPageRoute(
-                        builder: (context) => DetailPage(movie[index].id)),
+                        builder: (context) =>
+                            DetailPage(movie[index].id, text)),
                   );
                 },
-                child: Container(
-                  width: 100,
-                  margin: EdgeInsets.all(5),
-                  child: Image.network(
-                      'https://image.tmdb.org/t/p/original${movie[index].posterPath}'),
+                child: Hero(
+                  tag: '${text}-${movie[index].id}',
+                  child: Container(
+                    width: 100,
+                    margin: EdgeInsets.all(5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        'https://image.tmdb.org/t/p/original${movie[index].posterPath}',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
                 ),
               );
             },
