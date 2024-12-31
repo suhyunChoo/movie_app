@@ -1,6 +1,5 @@
 
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
-import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 import 'package:flutter_movie_app/domain/repository/movie_repository.dart';

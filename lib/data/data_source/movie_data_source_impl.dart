@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
@@ -112,12 +111,13 @@ class MovieDataSourceImpl implements MovieDataSource {
     try {
       Client client = Client();
       Response result = await client.get(
-        Uri.parse('https://api.themoviedb.org/3/movie/$id'),
+        Uri.parse('https://api.themoviedb.org/3/movie/$id?language=en-US'),
         headers: {
           'Authorization': dotenv.get('API_KEY'),
           'accept': 'application/json',
         },
       );
+  
 
       if (result.statusCode == 200) {
         final decodedJson = jsonDecode(result.body) as Map<String, dynamic>;

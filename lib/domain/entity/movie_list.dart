@@ -1,4 +1,3 @@
-import 'package:flutter_movie_app/data/dto/movie_response_dto.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/domain/entity/movie_detail.dart';
 

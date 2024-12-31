@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/domain/entity/movie.dart';
-import 'package:flutter_movie_app/domain/entity/movie_list.dart';
 import 'package:flutter_movie_app/presentation/pages/detail_page/detail_page.dart';
 import 'package:flutter_movie_app/presentation/pages/home_page/home_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,11 +11,11 @@ class HomePage extends StatelessWidget {
       body: Consumer(builder: (context, ref, child) {
         ref.watch(homePageViewModel);
         final movies = ref.watch(homePageViewModel);
-        if (movies == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+        // if (movies == null) {
+        //   return const Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // }
         if (movies.popularMovies.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),

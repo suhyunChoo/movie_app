@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_movie_app/domain/entity/movie.dart';
 import 'package:flutter_movie_app/domain/entity/movie_list.dart';
 import 'package:flutter_movie_app/presentation/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,16 +31,16 @@ class HomePageViewModel extends Notifier<MovieList> {
     }
   }
 
-  Future<void> fetchDetail(int id) async {
-    try {
-      final movieDetail =
-          await ref.read(fetchMoviesUsecaseProvider).getDetail(id);
+  // Future<void> fetchDetail(int id) async {
+  //   try {
+  //     final movieDetail =
+  //         await ref.read(fetchMoviesUsecaseProvider).getDetail(id);
 
-      state = state.copyWith(getMovieDetail: movieDetail);
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     state = state.copyWith(getMovieDetail: movieDetail);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 }
 
 final homePageViewModel =
