@@ -27,39 +27,33 @@ TMDB와 통신하여 실시간으로 영화 데이터를 받아와 보여주는 
 ## 📂 프로젝트 구조
 
 ```
-lib/
-│
-├── core/
-│   └── geolocator_helper.dart # 위치 정보 사용
-│
-├── data/                      # 데이터 레이어
-│   ├── model/                 # 데이터 모델 정의
-│   │   ├── chat.dart          # Chat 모델 클래스
-│   │   ├── message.dart       # Chat 내의 Message 모델 클래스
-│   │   ├── pet.dart           # Pet 모델 클래스
-│   │   └── user_model.dart    # User 모델 클래스
-│   │
-│   └── repository/            # 데이터 관리 및 CRUD
-│       ├── auth_repository.dart
-│       ├── chat_repository.dart
-│       ├── friends_repository.dart
-│       ├── message_repository.dart
-│       ├── my_page_repository.dart
-│       ├── user_repository.dart
-│       └── vworld0_repository.dart
-│
-├── ui/                        # UI 레이어
-│   ├── pages/                 # 페이지별 UI 화면
-│   │   ├── home/              # 홈 탭
-│   │   │   ├── _tab/          # 탭별 화면
-│   │   │   │   ├── friends/   # 친구 찾기
-│   │   │   │   └── mypage/    # 마이페이지
-│   │   └── login_join/        # 로그인 화면
-│   │
-│   └── widgets/               # 재사용 가능한 위젯들
-│       ├── dog_snack_bar.dart # 로그인 관련 알림 스낵바
-│       └── logo_text.dart
-│
-├── user_data.dart             # 사용자 데이터
-└── main.dart                  # 앱 시작점
-```
+lib
+ ┣ data
+ ┃ ┣ data_source
+ ┃ ┃ ┣ movie_data_source.dart
+ ┃ ┃ ┗ movie_data_source_impl.dart
+ ┃ ┣ dto
+ ┃ ┃ ┗ movie_response_dto.dart
+ ┃ ┗ repository
+ ┃ ┃ ┗ movie_repository_impl.dart
+ ┣ domain
+ ┃ ┣ entity
+ ┃ ┃ ┣ movie.dart
+ ┃ ┃ ┣ movie_detail.dart
+ ┃ ┃ ┗ movie_list.dart
+ ┃ ┣ repository
+ ┃ ┃ ┗ movie_repository.dart
+ ┃ ┗ usecase
+ ┃ ┃ ┗ fetch_movies_usecase.dart
+ ┣ presentation
+ ┃ ┣ pages
+ ┃ ┃ ┣ detail_page
+ ┃ ┃ ┃ ┣ detail_page.dart
+ ┃ ┃ ┃ ┗ detail_page_view_model.dart
+ ┃ ┃ ┗ home_page
+ ┃ ┃ ┃ ┣ home_page.dart
+ ┃ ┃ ┃ ┗ home_page_view_model.dart
+ ┃ ┣ widgets
+ ┃ ┗ providers.dart
+ ┣ main.dart
+ ┗ theme.dart

@@ -38,15 +38,14 @@ void main() {
     'dto test',
     () async {
       Map<String, dynamic> map = jsonDecode(str);
-      // MovieResponseDto movieResponseDto = MovieResponseDto.fromJson(map);
       List<dynamic> results = map['results'];
 
-      // Map the 'results' list to MovieResponseDto
       List<MovieResponseDto> movieResponseDto =
-          results.map((movie) => MovieResponseDto.fromJson(movie)).toList();
+        results.map((movie) => MovieResponseDto.fromJson(movie)).toList();
 
       print(movieResponseDto.first.id);
-      expect(movieResponseDto.first.id, '845781');
+      final resultStr = movieResponseDto.first.id.toString().replaceAll(RegExp(r'<[^>]*>'), '');
+      expect(resultStr, '845781');
     },
   );
 }

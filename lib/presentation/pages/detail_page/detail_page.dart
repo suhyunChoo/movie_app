@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/presentation/pages/detail_page/detail_page_view_model.dart';
-import 'package:flutter_movie_app/presentation/pages/home_page/home_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -12,9 +11,6 @@ class DetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch(homePageViewModel);
-    // final movies = ref.watch(homePageViewModel);
-    // ref.read(homePageViewModel.notifier).fetchDetail(movieId);
     final movies = ref.watch(detailPageViewModel);
     ref.read(detailPageViewModel.notifier).fetchDetail(movieId);
     return Scaffold(

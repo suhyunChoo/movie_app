@@ -11,11 +11,6 @@ class HomePage extends StatelessWidget {
       body: Consumer(builder: (context, ref, child) {
         ref.watch(homePageViewModel);
         final movies = ref.watch(homePageViewModel);
-        // if (movies == null) {
-        //   return const Center(
-        //     child: CircularProgressIndicator(),
-        //   );
-        // }
         if (movies.popularMovies.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),
