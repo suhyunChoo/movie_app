@@ -1,5 +1,5 @@
 <!-- <p align="center">
-  <img src="assets/images/mainLogo.svg" alt="App Logo" width="300">
+  <img src="assets/ScreenShot_1" alt="App" width="300">
 </p> -->
 
 # 영화 정보 앱
