@@ -1,5 +1,5 @@
 
-<img src="assets/ScreenShot_1" alt="App" width="300">
+<img src="https://github.com/user-attachments/assets/7c3f1f4d-f0b0-4928-a2dc-c40d477f5dd5" alt="App" width="300">
 
 # 영화 정보 앱
 
