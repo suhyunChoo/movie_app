@@ -1,6 +1,5 @@
-<!-- <p align="center">
-  <img src="assets/ScreenShot_1" alt="App" width="300">
-</p> -->
+
+<img src="assets/ScreenShot_1" alt="App" width="300">
 
 # 영화 정보 앱
 
